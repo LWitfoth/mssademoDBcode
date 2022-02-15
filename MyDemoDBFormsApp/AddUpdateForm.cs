@@ -14,6 +14,7 @@ namespace MyDemoDBFormsApp
 {
     public partial class AddUpdateForm : Form
     {
+        public event RespondToMessageEvent _respondToMessageEvent;
         public AddUpdateForm()
         {
             InitializeComponent();
@@ -47,6 +48,8 @@ namespace MyDemoDBFormsApp
 
             using (var db = new MyDbContext(Form1._optionsBuilder.Options))
             {
+                string msg = string.Empty;
+
                 if (Convert.ToInt32(txtID.Text) == 0)
                 {
                     //add
@@ -55,7 +58,7 @@ namespace MyDemoDBFormsApp
                     _person.LastName = txtLastName.Text ?? string.Empty;
                     db.People.Add(_person);
                     db.SaveChanges();
-
+                    msg = "Changes Added";
 
                 }
                 else
@@ -68,8 +71,14 @@ namespace MyDemoDBFormsApp
                         person.FirstName = txtFirstName.Text;
                         person.LastName = txtLastName.Text;
                         db.SaveChanges();
+                        msg = "Changes Updated";
                     }
 
+                }
+                
+                if (_respondToMessageEvent != null)
+                {
+                    _respondToMessageEvent.Invoke(msg);
                 }
                
             }

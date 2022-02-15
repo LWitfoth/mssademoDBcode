@@ -6,19 +6,31 @@ using System.Linq;
 
 namespace MyDemoDBFormsApp
 {
+    public delegate void RespondToMessageEvent(string message);
     public partial class Form1 : Form
     {
         private static IConfigurationRoot _configuration;
         public static DbContextOptionsBuilder<MyDbContext> _optionsBuilder;
+        
 
         public Form1()
         {
             InitializeComponent();
+           
+
         }
 
-        /// <summary>
-        /// still need to add Event on Main Form to trigger refresh to work
-        /// </summary>
+        private void RespondtoMessage(string m)
+        {
+
+            MessageBox.Show(m);
+            Refresh();
+        }
+
+
+        /// /*still need to add Event on Main Form to trigger refresh to work
+        /// //
+
         public void Refresh()
         {
             //load categories
@@ -40,12 +52,13 @@ namespace MyDemoDBFormsApp
         {
             BuildOptions();
             Refresh();
-           
+
         }
 
         private void btnAddPerson_click(object sender, EventArgs e)
         {
             var addForm = new AddUpdateForm();
+            addForm._respondToMessageEvent += new RespondToMessageEvent(RespondtoMessage);
             addForm.ShowDialog();
         }
 
@@ -61,7 +74,46 @@ namespace MyDemoDBFormsApp
                 person.LastName = (string)personData[2].Value;
 
                 var addForm = new AddUpdateForm(person);
+                addForm._respondToMessageEvent += new RespondToMessageEvent(RespondtoMessage);
                 addForm.ShowDialog();
+
+            }
+
+
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgPeople.SelectedRows.Count > 0)
+            {
+                //confirm delete
+                DialogResult userSelection = MessageBox.Show("Do you confirm delete?", "Confirm Delete", MessageBoxButtons.OKCancel);
+                if (userSelection == DialogResult.OK)
+                {
+
+                    //delete personID from persontable where personid=7
+                    var personData = dgPeople.SelectedRows[0].Cells;
+                    var deleteID = (int)personData[0].Value;
+                    using (var db = new MyDbContext(_optionsBuilder.Options))
+                    {
+                        var person = db.People.SingleOrDefault(x => x.Id == deleteID);
+                        if (person != null)
+                        {
+                            db.People.Remove(person);
+                            db.SaveChanges();
+                            Refresh();
+                        }
+                    }
+
+                    MessageBox.Show("Person Deleted");
+
+                }
+                else
+                {
+
+                }
+
 
             }
         }

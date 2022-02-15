@@ -82,7 +82,7 @@ namespace MyDemoDbApplication
             BuildOptions();
             Console.WriteLine("Hello World");
 
-            DoAdo();
+            //DoAdo();
         }
 
         private static void BuildOptions()

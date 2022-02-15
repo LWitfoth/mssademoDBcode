@@ -58,7 +58,7 @@ namespace MyDemoDBFormsApp
                     _person.LastName = txtLastName.Text ?? string.Empty;
                     db.People.Add(_person);
                     db.SaveChanges();
-                    msg = "Changes Added";
+                    msg = $"{_person.FirstName} {_person.LastName} person added";
 
                 }
                 else
@@ -71,7 +71,7 @@ namespace MyDemoDBFormsApp
                         person.FirstName = txtFirstName.Text;
                         person.LastName = txtLastName.Text;
                         db.SaveChanges();
-                        msg = "Changes Updated";
+                        msg = $"{_person.FirstName} {_person.LastName} person updated";
                     }
 
                 }

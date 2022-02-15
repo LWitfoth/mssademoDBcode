@@ -76,6 +76,7 @@ namespace MyDemoDBFormsApp
                 var addForm = new AddUpdateForm(person);
                 addForm._respondToMessageEvent += new RespondToMessageEvent(RespondtoMessage);
                 addForm.ShowDialog();
+                
 
             }
 
@@ -87,13 +88,14 @@ namespace MyDemoDBFormsApp
         {
             if (dgPeople.SelectedRows.Count > 0)
             {
+                var personData = dgPeople.SelectedRows[0].Cells;
                 //confirm delete
-                DialogResult userSelection = MessageBox.Show("Do you confirm delete?", "Confirm Delete", MessageBoxButtons.OKCancel);
+                DialogResult userSelection = MessageBox.Show($"Do you confirm delete of {personData[1].Value} {personData[2].Value}?", "Confirm Delete", MessageBoxButtons.OKCancel);
                 if (userSelection == DialogResult.OK)
                 {
 
                     //delete personID from persontable where personid=7
-                    var personData = dgPeople.SelectedRows[0].Cells;
+                    
                     var deleteID = (int)personData[0].Value;
                     using (var db = new MyDbContext(_optionsBuilder.Options))
                     {

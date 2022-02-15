@@ -28,12 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.dgPeople = new System.Windows.Forms.DataGridView();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            this.btnUpdatePerson = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPeople)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgPeople
+            // 
+            this.dgPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPeople.Location = new System.Drawing.Point(12, 12);
+            this.dgPeople.Name = "dgPeople";
+            this.dgPeople.RowTemplate.Height = 25;
+            this.dgPeople.Size = new System.Drawing.Size(670, 345);
+            this.dgPeople.TabIndex = 0;
+            // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.BackColor = System.Drawing.Color.Linen;
+            this.btnAddPerson.Location = new System.Drawing.Point(700, 50);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPerson.TabIndex = 1;
+            this.btnAddPerson.Text = "Add";
+            this.btnAddPerson.UseVisualStyleBackColor = false;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_click);
+            // 
+            // btnUpdatePerson
+            // 
+            this.btnUpdatePerson.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.btnUpdatePerson.Location = new System.Drawing.Point(704, 89);
+            this.btnUpdatePerson.Name = "btnUpdatePerson";
+            this.btnUpdatePerson.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdatePerson.TabIndex = 2;
+            this.btnUpdatePerson.Text = "Update";
+            this.btnUpdatePerson.UseVisualStyleBackColor = false;
+            this.btnUpdatePerson.Click += new System.EventHandler(this.btnUpdatePerson_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnUpdatePerson);
+            this.Controls.Add(this.btnAddPerson);
+            this.Controls.Add(this.dgPeople);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgPeople)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private DataGridView dgPeople;
+        private Button btnAddPerson;
+        private Button btnUpdatePerson;
     }
 }

@@ -28,7 +28,18 @@ namespace MyDemoDBFormsApp
             using (var db = new MyDbContext(_optionsBuilder.Options))
             {
                 var people = db.People.ToList();
+                dgPeople.DataSource = people;
             }
+        }
+
+        private void btnAddPerson_click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdatePerson_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
